@@ -15,4 +15,4 @@ docker rm t
 docker run -d -p 51413:51413 -p 51413:51413/udp \
     -p 9091:9091 -e TRANSMISSION_PASS=$TRANSMISSION_PASS \
     -v /home/downloads:/transmission/downloads \
-    --name t stevenmartins/transmission
+    --name t stevenmartins/docker-transmission
