@@ -1,6 +1,6 @@
-FROM ubuntu:14.04
+FROM ubuntu:latest
 
-MAINTAINER Steven MARTINS <steven.martins.fr@gmail.com>
+MAINTAINER Biojout Quentin <nuzolx@gmail.com>
 
 RUN apt-get update && \
     apt-get upgrade -y && \
@@ -10,20 +10,20 @@ RUN add-apt-repository -y ppa:transmissionbt/ppa && \
     apt-get update && \
     apt-get install -y transmission-daemon
 
-RUN mkdir -p /transmission/incomplete && \
+RUN mkdir -p /mnt/data/final && \
+    mkdir -p /mnt/data/tmp && \
     mkdir /etc/transmission
 
 ADD files/settings.json /etc/transmission/settings.json
 ADD files/start /start
 
-EXPOSE 51413
+EXPOSE 12345
 EXPOSE 9091
 
-VOLUME ["/transmission/downloads"]
-
-RUN chown -R daemon /transmission && \
-    chown -R daemon /etc/transmission
+RUN chown -R daemon /etc/transmission
 
 USER daemon
+
+VOLUME ["/mnt/data/final"]
 
 CMD ["/start"]
